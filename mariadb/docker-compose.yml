@@ -1,0 +1,18 @@
+version: "3.0"
+
+services:
+  mysql-db:
+    image: mariadb:10.4
+    restart: "yes"
+    volumes:
+      - mariadb:/var/lib/mariadb
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: "yes"
+      MYSQL_DATABASE: "core"
+      MYSQL_USER: "guest"
+      MYSQL_PASSWORD: "guest"
+
+volumes:
+  mariadb:

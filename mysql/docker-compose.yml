@@ -1,0 +1,21 @@
+version: "3.0"
+
+services:
+  mysql-db:
+    image: "mysql:latest"
+    container_name: "mysql-db"
+    restart: "always"
+    volumes:
+      - mysql-db:/var/lib/mysql
+    ports:
+      - 3306:3306
+    expose:
+      - 3306
+    environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: "yes"
+      MYSQL_DATABASE: "core"
+      MYSQL_USER: "guest"
+      MYSQL_PASSWORD: "guest"
+
+volumes:
+  mysql-db:
