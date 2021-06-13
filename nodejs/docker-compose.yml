@@ -1,0 +1,12 @@
+version: '3.8'
+services:
+  memo-api:
+    build: .
+    restart: 'always'
+    ports:
+      - 3000:3000
+    # cpu_count: 2
+    # cpus: '0.25'
+    # mem_limit: 2048MB
+    # env_file: .env
+    container_name: 'core-api'
