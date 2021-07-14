@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  mq-service:
+    image: rabbitmq:3-management-alpine
+    ports:
+      - 15672:15672
+      - 5672:5672
+    environment:
+      RABBITMQ_DEFAULT_USER: 'example-mq'
+      RABBITMQ_DEFAULT_PASS: 'Password12!'
+    volumes:
+      - rabbitmq-data:/var/lib/rabbitmq
+
+volumes:
+  abbitmq-data:

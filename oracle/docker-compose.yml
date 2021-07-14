@@ -1,0 +1,13 @@
+version: '3.8'
+
+volumes:
+  oracle_data:
+    driver: local
+
+services:
+  oracle:
+    image: carloscastillo/rgt-oracle-xe-11g
+    volumes:
+      - oracle_data:/var/lib/oracle/data
+    ports:
+      - 1521:1521
