@@ -3,22 +3,36 @@
 ## Existing examples
 
 - [Node.js](https://github.com/cyber-eternal/docker-compose-examples/blob/master/nodejs)
+
+### Databases
+
 - [Mongodb](https://github.com/cyber-eternal/docker-compose-examples/blob/master/mongodb/docker-compose.yml)
 - [MariaDB](https://github.com/cyber-eternal/docker-compose-examples/blob/master/mariadb/docker-compose.yml)
 - [MySQL](https://github.com/cyber-eternal/docker-compose-examples/blob/master/mysql/docker-compose.yml)
 - [MsSQL](https://github.com/cyber-eternal/docker-compose-examples/blob/master/mssql/docker-compose.yml)
 - [Postgres](https://github.com/cyber-eternal/docker-compose-examples/blob/master/postgres/docker-compose.yml)
 - [Oracle](https://github.com/cyber-eternal/docker-compose-examples/blob/master/oracle/docker-compose.yml)
-- [Mongodb](https://github.com/cyber-eternal/docker-compose-examples/blob/master/mariadb/docker-compose.yml)
-- [RabbitMQ](https://github.com/cyber-eternal/docker-compose-examples/blob/master/rabbitmq/docker-compose.yml)
 - [Redis](https://github.com/cyber-eternal/docker-compose-examples/blob/master/redis/docker-compose.yml)
+
+### ElasticSearch
+
 - [ElasticSearch](https://github.com/cyber-eternal/docker-compose-examples/blob/master/elasticsearch/docker-compose.yml)
-- [Keycloak](https://github.com/cyber-eternal/docker-compose-examples/blob/master/keycloak)
-  - [Keycloak with MySQL](https://github.com/cyber-eternal/docker-compose-examples/blob/master/keycloak/keycloak-mysql/docker-compose.yml)
-  - [Keycloak with MsSQL](https://github.com/cyber-eternal/docker-compose-examples/blob/master/keycloak/keycloak-mssql/docker-compose.yml)
-  - [Keycloak with Postgres](https://github.com/cyber-eternal/docker-compose-examples/blob/master/keycloak/keycloak-postgres/docker-compose.yml)
-  - [Keycloak with Oracle](https://github.com/cyber-eternal/docker-compose-examples/blob/master/keycloak/keycloak-oracle/docker-compose.yml)
-  - [Keycloak with MariaDB](https://github.com/cyber-eternal/docker-compose-examples/blob/master/keycloak/keycloak-mariadb/docker-compose.yml)
+
+### RabbitMQ messaging
+
+- [RabbitMQ](https://github.com/cyber-eternal/docker-compose-examples/blob/master/rabbitmq/docker-compose.yml)
+
+### MaiDev SMTP service
+
+- [MailDev](https://github.com/cyber-eternal/docker-compose-examples/blob/master/maildev/docker-compose.yml)
+
+### Keycloak single sign-on with Identity and Access Management aimed at modern applications and services
+
+- [Keycloak with MySQL](https://github.com/cyber-eternal/docker-compose-examples/blob/master/keycloak/keycloak-mysql/docker-compose.yml)
+- [Keycloak with MsSQL](https://github.com/cyber-eternal/docker-compose-examples/blob/master/keycloak/keycloak-mssql/docker-compose.yml)
+- [Keycloak with Postgres](https://github.com/cyber-eternal/docker-compose-examples/blob/master/keycloak/keycloak-postgres/docker-compose.yml)
+- [Keycloak with Oracle](https://github.com/cyber-eternal/docker-compose-examples/blob/master/keycloak/keycloak-oracle/docker-compose.yml)
+- [Keycloak with MariaDB](https://github.com/cyber-eternal/docker-compose-examples/blob/master/keycloak/keycloak-mariadb/docker-compose.yml)
 
 ### Command to run an example
 
