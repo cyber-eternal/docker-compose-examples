@@ -22,7 +22,7 @@
 
 - [RabbitMQ](https://github.com/cyber-eternal/docker-compose-examples/blob/master/rabbitmq/docker-compose.yml)
 
-### MaiDev SMTP service
+### MaiDev SMTP Server + Web Interface
 
 - [MailDev](https://github.com/cyber-eternal/docker-compose-examples/blob/master/maildev/docker-compose.yml)
 
