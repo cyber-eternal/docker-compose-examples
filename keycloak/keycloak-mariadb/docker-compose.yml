@@ -23,7 +23,7 @@ services:
       DB_ADDR: mariadb
       DB_DATABASE: keycloak
       DB_USER: keycloak
-      DB_PASSWORD: password
+      DB_PASSWORD: Password12!
       KEYCLOAK_USER: root
       KEYCLOAK_PASSWORD: Password12!
       JGROUPS_DISCOVERY_PROTOCOL: JDBC_PING
