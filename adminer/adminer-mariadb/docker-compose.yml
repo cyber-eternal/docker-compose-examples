@@ -26,6 +26,7 @@ services:
       ADMINER_DEFAULT_DB_DRIVER: mysql
       ADMINER_DEFAULT_DB_HOST: mariadb
       ADMINER_DEFAULT_DB_SERVER: mariadb
+      ADMINER_DEFAULT_SERVER: mariadb
       ADMINER_DEFAULT_DB_NAME: core
       ADMINER_DESIGN: dracula
       ADMINER_PLUGINS: tables-filter tinymce
