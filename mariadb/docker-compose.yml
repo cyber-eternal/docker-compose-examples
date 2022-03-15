@@ -2,7 +2,7 @@ version: "3.0"
 
 services:
   mysql-db:
-    image: mariadb:10.4
+    image: mariadb
     restart: "yes"
     volumes:
       - mariadb:/var/lib/mariadb

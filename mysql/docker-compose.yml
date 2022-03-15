@@ -1,21 +1,21 @@
-version: '3.0'
+version: '3.8'
 
 services:
   mysql-db:
-    image: 'mysql:latest'
     container_name: 'mysql-db'
-    restart: 'always'
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: on-failure
     volumes:
-      - mysql-db:/var/lib/mysql
+      - mysql-db-data:/var/lib/mysql
     ports:
       - 3306:3306
-    expose:
-      - 3306
     environment:
       MYSQL_RANDOM_ROOT_PASSWORD: 'yes'
       MYSQL_DATABASE: 'core'
       MYSQL_USER: 'guest'
       MYSQL_PASSWORD: 'guest'
+      MYSQL_PORT: 3306
 
 volumes:
-  mysql-db:
+  mysql-db-data:

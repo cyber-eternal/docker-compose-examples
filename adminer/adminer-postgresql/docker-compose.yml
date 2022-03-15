@@ -2,6 +2,7 @@ version: '3.8'
 
 services:
   postgres:
+    container_name: postgres
     image: postgres
     volumes:
       - postgres_data:/var/lib/postgresql/data
@@ -11,6 +12,7 @@ services:
       POSTGRES_USER: adminer
 
   adminer:
+    container_name: 'postgres-adminer'
     image: adminer
     ports:
       - 8081:8080
