@@ -1,6 +1,7 @@
 version: '3.8'
 services:
   api:
+    container_name: 'api'
     build: .
     restart: 'always'
     ports:
@@ -9,4 +10,12 @@ services:
     # cpus: '0.25'
     # mem_limit: 2048MB
     # env_file: .env
-    container_name: 'api'
+    volumes:
+      - api_data:/var/lib/api
+    environment:
+      NODE_ENV: development
+      APP_PORT: 3000
+
+volumes:
+  api_data:
+    driver: local
