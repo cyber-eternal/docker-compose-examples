@@ -20,6 +20,7 @@ Docker and Docker Compose Examples
 ### ElasticSearch
 
 - [ElasticSearch](https://github.com/cyber-eternal/docker-compose-examples/blob/master/elasticsearch/docker-compose.yml)
+- [ElasticSearch + Kibana](https://github.com/cyber-eternal/docker-compose-examples/blob/master/elasticsearch-kibana/docker-compose.yml)
 
 ### RabbitMQ messaging
 
@@ -62,4 +63,5 @@ docker-compose up -d --build
 - Twitter - [@cybereternal](https://twitter.com/cybereternal)
 
 ### License Summary
+
 This sample code is made available under a modified MIT license. See the LICENSE file.

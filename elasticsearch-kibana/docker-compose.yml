@@ -1,95 +1,128 @@
 version: '3.8'
-
 services:
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:8.2.1
-    container_name: elasticsearch
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.9.0
+    container_name: elasticsearch1
     environment:
+      - node.name=elasticsearch1
       - cluster.name=docker-cluster
+      - cluster.initial_master_nodes=elasticsearch1
       - bootstrap.memory_lock=true
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - "ES_JAVA_OPTS=-Xms256M -Xmx256M"
       - http.cors.enabled=true
       - http.cors.allow-origin=*
-      - discovery.zen.minimum_master_nodes=2
+      - network.host=_eth0_
     ulimits:
+      nproc: 65535
       memlock:
         soft: -1
         hard: -1
+    cap_add:
+      - ALL
     volumes:
-      - esdata1:/usr/share/elasticsearch/data
+      - type: volume
+        source: logs
+        target: /var/log
+      - type: volume
+        source: esdata1
+        target: /usr/share/elasticsearch/data
+    networks:
+      - elastic
     ports:
       - 9200:9200
-    networks:
-      - esnet
-
+      - 9300:9300
   elasticsearch2:
-    image: docker.elastic.co/elasticsearch/elasticsearch:8.2.1
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.9.0
     container_name: elasticsearch2
     environment:
+      - node.name=elasticsearch2
       - cluster.name=docker-cluster
+      - cluster.initial_master_nodes=elasticsearch1
       - bootstrap.memory_lock=true
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-      - "discovery.zen.ping.unicast.hosts=elasticsearch"
+      - "ES_JAVA_OPTS=-Xms256M -Xmx256M"
+      - "discovery.zen.ping.unicast.hosts=elasticsearch1"
       - http.cors.enabled=true
       - http.cors.allow-origin=*
-      - discovery.zen.minimum_master_nodes=2
+      - network.host=_eth0_
     ulimits:
+      nproc: 65535
       memlock:
         soft: -1
         hard: -1
+    cap_add:
+      - ALL
     volumes:
-      - esdata2:/usr/share/elasticsearch/data
+      - type: volume
+        source: logs
+        target: /var/log
+      - type: volume
+        source: esdata2
+        target: /usr/share/elasticsearch/data
     networks:
-      - esnet
-
+      - elastic
+    ports:
+      - 9201:9200
   elasticsearch3:
-    image: docker.elastic.co/elasticsearch/elasticsearch:8.2.1
+    image: docker.elastic.co/elasticsearch/elasticsearch:7.9.0
     container_name: elasticsearch3
     environment:
+      - node.name=elasticsearch3
       - cluster.name=docker-cluster
+      - cluster.initial_master_nodes=elasticsearch1
       - bootstrap.memory_lock=true
-      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
-      - "discovery.zen.ping.unicast.hosts=elasticsearch"
+      - "ES_JAVA_OPTS=-Xms256M -Xmx256M"
+      - "discovery.zen.ping.unicast.hosts=elasticsearch1"
       - http.cors.enabled=true
       - http.cors.allow-origin=*
-      - discovery.zen.minimum_master_nodes=2
+      - network.host=_eth0_
     ulimits:
+      nproc: 65535
       memlock:
         soft: -1
         hard: -1
+    cap_add:
+      - ALL
     volumes:
-      - esdata3:/usr/share/elasticsearch/data
+      - type: volume
+        source: logs
+        target: /var/log
+      - type: volume
+        source: esdata3
+        target: /usr/share/elasticsearch/data
     networks:
-      - esnet
-
+      - elastic
+    ports:
+      - 9202:9200
   kibana:
-    image: 'docker.elastic.co/kibana/kibana:8.2.1'
+    image: docker.elastic.co/kibana/kibana:7.9.0
     container_name: kibana
     environment:
-      SERVER_NAME: kibana.local
-      ELASTICSEARCH_URL: http://elasticsearch:9200
+      SERVER_NAME: localhost
+      ELASTICSEARCH_URL: http://elasticsearch1:9200/
     ports:
-      - '5601:5601'
+      - 5601:5601
     expose:
       - 5601
+    volumes:
+      - type: volume
+        source: logs
+        target: /var/log
+    ulimits:
+      nproc: 65535
+      memlock:
+        soft: -1
+        hard: -1
+    cap_add:
+      - ALL
     networks:
-      - esnet
+      - elastic
 
-  headPlugin:
-    image: 'mobz/elasticsearch-head:5'
-    container_name: head
-    ports:
-      - '9100:9100'
-    networks:
-      - esnet
 
 volumes:
   esdata1:
-    driver: local
   esdata2:
-    driver: local
   esdata3:
-    driver: local    
+  logs:  
 
 networks:
-  esnet:
+  elastic:
