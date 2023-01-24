@@ -1,128 +1,40 @@
-version: '3.8'
+
+version: "3.9"
 services:
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.9.0
-    container_name: elasticsearch1
+    image: elasticsearch:8.4.0
     environment:
-      - node.name=elasticsearch1
-      - cluster.name=docker-cluster
-      - cluster.initial_master_nodes=elasticsearch1
-      - bootstrap.memory_lock=true
-      - "ES_JAVA_OPTS=-Xms256M -Xmx256M"
-      - http.cors.enabled=true
-      - http.cors.allow-origin=*
-      - network.host=_eth0_
-    ulimits:
-      nproc: 65535
-      memlock:
-        soft: -1
-        hard: -1
-    cap_add:
-      - ALL
+      - discovery.type=single-node
+      - ES_JAVA_OPTS=-Xms1g -Xmx1g
+      - xpack.security.enabled=false
     volumes:
-      - type: volume
-        source: logs
-        target: /var/log
-      - type: volume
-        source: esdata1
-        target: /usr/share/elasticsearch/data
+      - es_data:/usr/share/elasticsearch/data
+    ports:
+      - target: 9200
+        published: 9200
+    expose:
+      - 9200
     networks:
       - elastic
-    ports:
-      - 9200:9200
-      - 9300:9300
-  elasticsearch2:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.9.0
-    container_name: elasticsearch2
-    environment:
-      - node.name=elasticsearch2
-      - cluster.name=docker-cluster
-      - cluster.initial_master_nodes=elasticsearch1
-      - bootstrap.memory_lock=true
-      - "ES_JAVA_OPTS=-Xms256M -Xmx256M"
-      - "discovery.zen.ping.unicast.hosts=elasticsearch1"
-      - http.cors.enabled=true
-      - http.cors.allow-origin=*
-      - network.host=_eth0_
-    ulimits:
-      nproc: 65535
-      memlock:
-        soft: -1
-        hard: -1
-    cap_add:
-      - ALL
-    volumes:
-      - type: volume
-        source: logs
-        target: /var/log
-      - type: volume
-        source: esdata2
-        target: /usr/share/elasticsearch/data
-    networks:
-      - elastic
-    ports:
-      - 9201:9200
-  elasticsearch3:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.9.0
-    container_name: elasticsearch3
-    environment:
-      - node.name=elasticsearch3
-      - cluster.name=docker-cluster
-      - cluster.initial_master_nodes=elasticsearch1
-      - bootstrap.memory_lock=true
-      - "ES_JAVA_OPTS=-Xms256M -Xmx256M"
-      - "discovery.zen.ping.unicast.hosts=elasticsearch1"
-      - http.cors.enabled=true
-      - http.cors.allow-origin=*
-      - network.host=_eth0_
-    ulimits:
-      nproc: 65535
-      memlock:
-        soft: -1
-        hard: -1
-    cap_add:
-      - ALL
-    volumes:
-      - type: volume
-        source: logs
-        target: /var/log
-      - type: volume
-        source: esdata3
-        target: /usr/share/elasticsearch/data
-    networks:
-      - elastic
-    ports:
-      - 9202:9200
+
   kibana:
-    image: docker.elastic.co/kibana/kibana:7.9.0
-    container_name: kibana
-    environment:
-      SERVER_NAME: localhost
-      ELASTICSEARCH_URL: http://elasticsearch1:9200/
+    image: kibana:8.4.0
     ports:
-      - 5601:5601
+      - target: 5601
+        published: 5601
     expose:
       - 5601
-    volumes:
-      - type: volume
-        source: logs
-        target: /var/log
-    ulimits:
-      nproc: 65535
-      memlock:
-        soft: -1
-        hard: -1
-    cap_add:
-      - ALL
+    depends_on:
+      - elasticsearch
     networks:
       - elastic
 
 
 volumes:
-  esdata1:
-  esdata2:
-  esdata3:
-  logs:  
+  es_data:
+    driver: local
 
 networks:
   elastic:
+    name: elastic
+    driver: bridge
